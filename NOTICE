@@ -1,0 +1,9 @@
+Flipper Watch Remote
+Copyright 2026 Radosław Zdończyk
+
+This product includes software developed for driving a Flipper Zero from a Garmin
+Connect IQ watch. Licensed under the Apache License, Version 2.0.
+
+The companion Momentum firmware patch (rz-x/Momentum-Firmware, branch
+feature/open-ble-pairing) is a derivative of Momentum Firmware and is licensed
+separately under the GNU General Public License v3.0, as Momentum requires.

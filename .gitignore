@@ -1,0 +1,12 @@
+# build artifacts / editor / OS
+watchapp/bin/
+*.prg
+*.prg.debug.xml
+# Connect IQ signing keys — never commit these. *.der was already covered, but a .pem placed
+# anywhere outside watchapp/ was not; the private half of the signing key must not leave the
+# machine. Both forms are ignored repo-wide.
+developer_key
+*.der
+*.pem
+.DS_Store
+*.swp

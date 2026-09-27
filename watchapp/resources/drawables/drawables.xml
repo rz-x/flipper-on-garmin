@@ -1,0 +1,6 @@
+<drawables>
+  <!-- Momentum dolphin face (assets/icons/Dolphin/WarningDolphin_45x42.png), drawn white on
+       transparent: the Garmin launcher is dark, so a white-background icon would show as a
+       bright square. Kept as thin line art - dilating the strokes turns it into a blob at 40px. -->
+  <bitmap id="LauncherIcon" filename="launcher_icon.png" />
+</drawables>
