@@ -54,6 +54,40 @@ Momentum build. It mirrors correctly and sends all basic inputs.
 
 Check [`docs/COMPATIBILITY.md`](docs/COMPATIBILITY.md) to see whether your Garmin may work.
 
+## Install
+
+Two parts, two installs. With the ready-made firmware build it is about 15 minutes.
+
+### 1. Flipper firmware
+
+Grab the `.tgz` from [Releases](https://github.com/rz-x/momentum-firmware-for-garmin/releases) and flash it
+like any Momentum update: qFlipper, or drop it on the SD card and pick it in the updater. Then on the
+Flipper: **Momentum -> Protocols -> Open BLE Pairing -> ON**, and reboot when asked.
+
+To build it yourself, same toolchain as stock Momentum:
+
+```bash
+git clone --recursive -b feature/open-ble-pairing https://github.com/rz-x/momentum-firmware-for-garmin.git
+cd momentum-firmware-for-garmin
+./fbt updater_package    # .tgz lands in dist/f7-C/
+./fbt flash_usb_full     # or flash straight over USB, qFlipper closed
+```
+
+### 2. Watch app
+
+There is no store release yet, so the app is built with the free Connect IQ SDK:
+
+1. Install the SDK via Garmin's SDK Manager (needs a Garmin login) and add your watch's device files.
+2. Generate a developer key:
+   `openssl genrsa -out developer_key.pem 4096 && openssl pkcs8 -topk8 -inform PEM -outform DER -in developer_key.pem -out developer_key.der -nocrypt`
+3. Build, replacing `descentmk2` with your device id:
+   `monkeyc -f monkey.jungle -o bin/flipper.prg -y developer_key.der -d descentmk2`
+   Or run `tools/build-all-devices.sh` to build every device you have installed at once.
+4. Sideload the `.prg` with Garmin Express, or copy it to the watch over USB into
+   `Primary/GARMIN/Apps/`.
+
+Details and the on-device test procedure: [`watchapp/README.md`](watchapp/README.md).
+
 ## Firmware and BLE
 
 This project needs its `feature/open-ble-pairing` Momentum build. Stock Momentum protects its
@@ -76,7 +110,7 @@ not a judgment on Momentum or its maintainers.
 That surprised me, especially today. In my view, it may hurt the project by turning away many
 other useful contributions.
 
-For local builds and wire-layer tests, see [`watchapp/README.md`](watchapp/README.md). The deeper
+For wire-layer tests and the on-device procedure, see [`watchapp/README.md`](watchapp/README.md). The deeper
 record of the BLE work is in [`docs/PROJECT-JOURNAL.md`](docs/PROJECT-JOURNAL.md), and the draft
 firmware proposal is in [`docs/UPSTREAM-PR.md`](docs/UPSTREAM-PR.md).
 
