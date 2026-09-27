@@ -4,6 +4,8 @@ Drive a **Flipper Zero from a Garmin watch.** Use the watch buttons to control t
 The watch mirrors its screen over Bluetooth Low Energy. The Flipper can stay in a pocket or a
 backpack while you use its own interface from your wrist.
 
+> Full write-up and project story: **[Controlling Flipper Zero with a Garmin Watch](https://rdnsec.info/projects/flipper-on-garmin/)**
+
 ![A Garmin watch on a wrist shows the Flipper menu beside a Flipper Zero with an antenna accessory](docs/pics/main_00.jpeg)
 
 ## Why I made it
