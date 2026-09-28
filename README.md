@@ -56,7 +56,12 @@ Check [`docs/COMPATIBILITY.md`](docs/COMPATIBILITY.md) to see whether your Garmi
 
 ## Install
 
-Two parts, two installs. With the ready-made firmware build it is about 15 minutes.
+Two parts, two installs. The quick way needs no toolchain at all:
+
+| Part | Ready-made | Do this |
+|---|---|---|
+| Flipper firmware | [.tgz from Releases](https://github.com/rz-x/momentum-firmware-for-garmin/releases) | flash, enable **Open BLE Pairing** |
+| Watch app | [v1.0.0 zip, 118 models](https://github.com/rz-x/flipper-on-garmin/releases) | copy one `.prg` to the watch |
 
 ### 1. Flipper firmware
 
@@ -75,7 +80,13 @@ cd momentum-firmware-for-garmin
 
 ### 2. Watch app
 
-There is no store release yet, so the app is built with the free Connect IQ SDK:
+Quickest: download the [release zip](https://github.com/rz-x/flipper-on-garmin/releases), unpack it and
+copy the `.prg` matching your watch (`flipper_<model>.prg`, e.g. `flipper_descentmk2.prg`) to the
+watch over USB into `Primary/GARMIN/Apps/`, or sideload it with Garmin Express. Watches on Connect IQ
+7 or newer need Developer Mode enabled in the Connect IQ settings first, otherwise a sideloaded app
+will not start.
+
+Or build it yourself with the free Connect IQ SDK:
 
 1. Install the SDK via Garmin's SDK Manager (needs a Garmin login) and add your watch's device files.
 2. Generate a developer key:
@@ -87,6 +98,20 @@ There is no store release yet, so the app is built with the free Connect IQ SDK:
    `Primary/GARMIN/Apps/`.
 
 Details and the on-device test procedure: [`watchapp/README.md`](watchapp/README.md).
+
+### 3. First run
+
+1. Flipper: **Momentum -> Protocols -> Open BLE Pairing -> ON** (if you have not done it yet).
+2. Start the app on the watch. It scans, finds the Flipper and connects.
+3. The Flipper asks **Allow BLE remote?** - confirm with LEFT/OK, and the watch address is
+   remembered (up to eight; **Forget BLE Remotes** clears them).
+4. The Flipper screen appears on the watch. Buttons: UP/DOWN move, double-tap ENTER switches axis,
+   ENTER is OK, BACK is BACK. Hold BACK ~1.5 s to leave.
+
+If nothing connects: check that Open BLE Pairing is on and the Flipper has rebooted since, that the
+watch is not already bonded to a phone (Garmin Connect app), and that the watch app was sideloaded
+with Developer Mode on. No encryption reaches over this link, so switch the setting off when you
+are not using it.
 
 ## Firmware and BLE
 
